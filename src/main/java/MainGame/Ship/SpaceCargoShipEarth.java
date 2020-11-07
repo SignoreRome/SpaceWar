@@ -30,7 +30,7 @@ public class SpaceCargoShipEarth extends SpaceShip implements Runnable, Tranzit 
 
     @Override
     public void fillingFiles() throws IOException {
-        synchronized (Locker.lockerEarth) {
+        synchronized (Locker.LOCKER_EARTH) {
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(EarthPlanet.getEarthPlanet().getNameClass()));
                  FileWriter fileWriter = new FileWriter(nameClass)
             ) {
@@ -44,7 +44,7 @@ public class SpaceCargoShipEarth extends SpaceShip implements Runnable, Tranzit 
                         System.out.print((char) c + " ");
                         fileWriter.flush();
                         Thread.sleep(2000);
-                        Locker.lockerEarth.wait();
+                        Locker.LOCKER_EARTH.wait();
                     }
                     System.out.println("Корабль Земли заполнен и начал движение в сторону Орбитальной станции");
                 }
@@ -74,7 +74,7 @@ public class SpaceCargoShipEarth extends SpaceShip implements Runnable, Tranzit 
 
     @Override
     public void tranzitFromOrbit() {
-        synchronized (Locker.lockerOrbit) {
+        synchronized (Locker.LOCKER_ORBIT) {
             try (BufferedReader bufferedReaderFileOrbit = new BufferedReader(new FileReader(OrbitalPlanet.getNameClass()));
                  BufferedReader bufferedReaderFileShip = new BufferedReader(new FileReader(nameClass));
                  FileWriter fileWriterOrbit = new FileWriter(OrbitalPlanet.getNameClass(), true);
@@ -98,13 +98,13 @@ public class SpaceCargoShipEarth extends SpaceShip implements Runnable, Tranzit 
 
     @Override
     public void tranzitToPlanet() {
-        synchronized (Locker.lockerEarth) {
+        synchronized (Locker.LOCKER_EARTH) {
             try (BufferedReader bufferedReaderFileShip = new BufferedReader(new FileReader(nameClass));
                  FileWriter fileWriterEarth = new FileWriter(EarthPlanet.getEarthPlanet().getNameClass(), true);
             ) {
                 String strFileShip = bufferedReaderFileShip.readLine();
                 System.out.println("корабль Земли вернулся с " + strFileShip);
-                fileWriterEarth.write("*****" + strFileShip + "*****" + "\n");
+                fileWriterEarth.write("*****" + strFileShip + "*****");
                 fileWriterEarth.flush();
                 /*try (FileWriter fileWriterShip = new FileWriter(nameClass)) {
                 }

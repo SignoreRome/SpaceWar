@@ -46,14 +46,14 @@ public class MarsPlanet extends SpacePlanets implements Runnable {
 
     @Override
     public void fillingFiles() throws IOException {
-        synchronized (Locker.lockerMars) {
+        synchronized (Locker.LOCKER_MARS) {
             Random randomSymbol = new Random();
             char randomChar = (char) (randomSymbol.nextInt(25) + 'a');
             try (FileWriter fileWriter = new FileWriter(nameClass, true)) {
                 fileWriter.write(randomChar);
                 System.out.print(randomChar + " ");
                 fileWriter.flush();
-                Locker.lockerMars.notify();
+                Locker.LOCKER_MARS.notify();
             } catch (IOException ioException) {
                 System.out.println("Не удалось записать файл");
             }

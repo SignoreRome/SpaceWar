@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Random;
+
 
 public class OrbitalPlanet extends SpacePlanets {
     private static String nameClass = "E:\\JavaProjects\\SpaceWar\\" + OrbitalPlanet.class.getSimpleName() + ".txt";
@@ -31,7 +31,7 @@ public class OrbitalPlanet extends SpacePlanets {
 
     @Override
     public void fillingFiles() throws IOException {
-        synchronized (Locker.lockerOrbit) {
+        synchronized (Locker.LOCKER_ORBIT) {
             try (FileWriter fileWriter = new FileWriter(nameClass)) {
                 fileWriter.write("Earth and Mars");
                 fileWriter.flush();

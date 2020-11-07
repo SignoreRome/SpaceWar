@@ -46,14 +46,14 @@ public class EarthPlanet extends SpacePlanets implements Runnable {
 
     @Override
     public void fillingFiles() {
-        synchronized (Locker.lockerEarth) {
+        synchronized (Locker.LOCKER_EARTH) {
             Random randomSymbol = new Random();
             char randomChar = (char) (randomSymbol.nextInt(25) + 'a');
             try (FileWriter fileWriter = new FileWriter(nameClass, true)) {
                 fileWriter.write(randomChar);
                 System.out.print(randomChar + " ");
                 fileWriter.flush();
-                Locker.lockerEarth.notify();
+                Locker.LOCKER_EARTH.notify();
             } catch (IOException ioException) {
                 System.out.println("Не удалось записать файл");
             }

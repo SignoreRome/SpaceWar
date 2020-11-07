@@ -1,7 +1,5 @@
 package MainGame;
 
-import MainGame.Planets.EarthPlanet;
-
 import java.io.IOException;
 
 public class SpaceWar {

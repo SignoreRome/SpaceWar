@@ -2,7 +2,6 @@ package MainGame.Planets;
 
 import Engine.CreateFiles;
 
-import java.io.IOException;
 
 public abstract class SpacePlanets implements CreateFiles {
     private String namePlanet;
