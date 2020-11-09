@@ -2,11 +2,12 @@ package Engine;
 
 import MainGame.Resources.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface Interaction {
     //Обмен любых ресурсов в золото
-    default void swapResourcesToGold(List<?> list1, List<GoldResource> list2, int count){
+    default void swapResourcesToGold(List<? extends Resource> list1, List<GoldResource> list2, int count){
         for (int i = 0; i < count; i++) {
             list1.remove(list1.size()-1);
             list2.add(new GoldResource());
@@ -26,7 +27,7 @@ public interface Interaction {
             list2.add(new WaterResource());
         }
     }
-    //Обмен золорта в уран
+    //Обмен золота в уран
     default void swapGoldToUran(List<GoldResource> list1, List<UranResource> list2, int count){
         for (int i = 0; i < count; i++) {
             list1.remove(list1.size()-1);
@@ -55,6 +56,14 @@ public interface Interaction {
         for (int i = 0; i < count; i++) {
             listFrom.remove(listFrom.size()-1);
             listTo.add(new UranResource());
+        }
+    }
+    //Пробный метод, функциональность пока не проверена, добавляет копию 1 элемента ListTo в него же
+    default <T> void getResource(List<T> listFrom, List<T> listTo, int count){
+        List<T> tList = new ArrayList<>(listTo);
+        for (int i = 0; i < count; i++) {
+            listFrom.remove(listFrom.size()-1);
+            listTo.add(tList.get(0));
         }
     }
 }
