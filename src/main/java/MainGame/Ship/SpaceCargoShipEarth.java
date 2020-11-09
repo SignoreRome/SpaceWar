@@ -2,9 +2,7 @@ package MainGame.Ship;
 
 
 import Engine.Tranzit;
-import MainGame.Planets.EarthPlanet;
 import MainGame.Planets.Locker;
-import MainGame.Planets.OrbitalPlanet;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -31,7 +29,7 @@ public class SpaceCargoShipEarth extends SpaceShip implements Runnable, Tranzit 
     @Override
     public void fillingFiles() throws IOException {
         synchronized (Locker.LOCKER_EARTH) {
-            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(EarthPlanet.getEarthPlanet().getNameClass()));
+            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(EarthPlanetFirstVer.getEarthPlanet().getNameClass()));
                  FileWriter fileWriter = new FileWriter(nameClass)
             ) {
                 int c;
@@ -75,9 +73,9 @@ public class SpaceCargoShipEarth extends SpaceShip implements Runnable, Tranzit 
     @Override
     public void tranzitFromOrbit() {
         synchronized (Locker.LOCKER_ORBIT) {
-            try (BufferedReader bufferedReaderFileOrbit = new BufferedReader(new FileReader(OrbitalPlanet.getNameClass()));
+            try (BufferedReader bufferedReaderFileOrbit = new BufferedReader(new FileReader(OrbitalPlanetFirstVer.getNameClass()));
                  BufferedReader bufferedReaderFileShip = new BufferedReader(new FileReader(nameClass));
-                 FileWriter fileWriterOrbit = new FileWriter(OrbitalPlanet.getNameClass(), true);
+                 FileWriter fileWriterOrbit = new FileWriter(OrbitalPlanetFirstVer.getNameClass(), true);
             ) {
                 String strFileOrbit = bufferedReaderFileOrbit.readLine();
                 String strFileShip = bufferedReaderFileShip.readLine();
@@ -100,7 +98,7 @@ public class SpaceCargoShipEarth extends SpaceShip implements Runnable, Tranzit 
     public void tranzitToPlanet() {
         synchronized (Locker.LOCKER_EARTH) {
             try (BufferedReader bufferedReaderFileShip = new BufferedReader(new FileReader(nameClass));
-                 FileWriter fileWriterEarth = new FileWriter(EarthPlanet.getEarthPlanet().getNameClass(), true);
+                 FileWriter fileWriterEarth = new FileWriter(EarthPlanetFirstVer.getEarthPlanet().getNameClass(), true);
             ) {
                 String strFileShip = bufferedReaderFileShip.readLine();
                 System.out.println("корабль Земли вернулся с " + strFileShip);

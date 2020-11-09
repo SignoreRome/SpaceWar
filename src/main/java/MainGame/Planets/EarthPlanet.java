@@ -1,74 +1,43 @@
 package MainGame.Planets;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Random;
+import Engine.Interaction;
 
-public class EarthPlanet extends SpacePlanets implements Runnable {
+import java.util.List;
 
-    private static String nameClass = "E:\\JavaProjects\\SpaceWar\\" + EarthPlanet.class.getSimpleName() + ".txt";
+public class EarthPlanet extends SpacePlanets {
+    //Для будущей реализации
+    private int coordinateX;
+    private int coordinateY;
 
-    private static EarthPlanet earthPlanet;
+    private static EarthPlanet earthPlanet = new EarthPlanet(0, 0, 10, 1, 1, 100);
 
-    static {
-        try {
-            earthPlanet = new EarthPlanet();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private EarthPlanet(int START_COORDINATE_X, int START_COORDINATE_Y, int START_COUNT_OF_WATER, int START_COUNT_OF_IRON, int START_COUNT_OF_URAN, int START_COUNT_OF_GOLD) {
+        super(START_COORDINATE_X, START_COORDINATE_Y, START_COUNT_OF_WATER, START_COUNT_OF_IRON, START_COUNT_OF_URAN, START_COUNT_OF_GOLD);
     }
 
-    private EarthPlanet() throws IOException {
-        createFile();
-    }
-
-    public static EarthPlanet getEarthPlanet() throws IOException {
+    public static EarthPlanet getEarthPlanet() {
         if (earthPlanet == null)
-            earthPlanet = new EarthPlanet();
+            earthPlanet = new EarthPlanet(0, 0, 10, 1, 1, 100);
         return earthPlanet;
     }
 
-    public String getNameClass() {
-        return nameClass;
+    //Для будущей реализации
+    public int getCoordinateX() {
+        return coordinateX;
     }
 
-    @Override
-    public void createFile() throws IOException {
-        if (Files.isRegularFile(Path.of(nameClass))) {
-            System.out.println("Файл планеты Земля уже был создан");
-        } else {
-            Files.createFile(Path.of(nameClass));
-            System.out.println("Файл планеты Земля был создан");
-        }
+    //Для будущей реализации
+    public void setCoordinateX(int coordinateX) {
+        this.coordinateX = coordinateX;
     }
 
-    @Override
-    public void fillingFiles() {
-        synchronized (Locker.LOCKER_EARTH) {
-            Random randomSymbol = new Random();
-            char randomChar = (char) (randomSymbol.nextInt(25) + 'a');
-            try (FileWriter fileWriter = new FileWriter(nameClass, true)) {
-                fileWriter.write(randomChar);
-                System.out.print(randomChar + " ");
-                fileWriter.flush();
-                Locker.LOCKER_EARTH.notify();
-            } catch (IOException ioException) {
-                System.out.println("Не удалось записать файл");
-            }
-        }
+    //Для будущей реализации
+    public int getCoordinateY() {
+        return coordinateY;
     }
 
-    @Override
-    public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
-            try {
-                Thread.sleep(1000);
-                fillingFiles();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+    //Для будущей реализации
+    public void setCoordinateY(int coordinateY) {
+        this.coordinateY = coordinateY;
     }
 }

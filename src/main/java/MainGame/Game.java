@@ -1,19 +1,17 @@
 package MainGame;
 
-import MainGame.Planets.EarthPlanet;
-import MainGame.Planets.MarsPlanet;
-import MainGame.Planets.OrbitalPlanet;
-import MainGame.Planets.SpacePlanets;
 import MainGame.Ship.SpaceCargoShipEarth;
 import MainGame.Ship.SpaceCargoShipMars;
 
 import java.io.IOException;
 
 public class Game {
+    public final static int GAME_SPEED = 1;
+
     public void StartGame() throws IOException, InterruptedException {
-        SpacePlanets earth = EarthPlanet.getEarthPlanet();
-        SpacePlanets mars = MarsPlanet.getMarsPlanet();
-        SpacePlanets orbit = new OrbitalPlanet();
+        SpacePlanetsFirstVer earth = EarthPlanetFirstVer.getEarthPlanet();
+        SpacePlanetsFirstVer mars = MarsPlanetFirstVer.getMarsPlanet();
+        SpacePlanetsFirstVer orbit = new OrbitalPlanetFirstVer();
         Thread threadEarth = new Thread((Runnable) earth);
         Thread threadMars = new Thread((Runnable) mars);
         Thread threadCargoShipEarth = new Thread(new SpaceCargoShipEarth());
