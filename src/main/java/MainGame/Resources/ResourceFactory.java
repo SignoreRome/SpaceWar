@@ -7,8 +7,8 @@ public class ResourceFactory {
     private static int countWaterResource;
 
 
-    public Resource getResource(ResourceTypes type){
-        switch (type){
+    public Resource getResource(ResourceTypes type) {
+        switch (type) {
             case GOLD -> new GoldResource();
             case IRON -> new IronResource();
             case URAN -> new UranResource();

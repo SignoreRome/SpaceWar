@@ -1,8 +1,6 @@
 package MainGame.Planets;
 
-import Engine.Interaction;
-
-public class MarsPlanet extends SpacePlanets {
+public final class MarsPlanet extends SpacePlanets {
     private int coordinateX;
     private int coordinateY;
 
@@ -16,21 +14,5 @@ public class MarsPlanet extends SpacePlanets {
         if (marsPlanet == null)
             return marsPlanet = new MarsPlanet(0, 0, 1, 10, 1, 100);
         return marsPlanet;
-    }
-
-    public int getCoordinateX() {
-        return coordinateX;
-    }
-
-    public void setCoordinateX(int coordinateX) {
-        this.coordinateX = coordinateX;
-    }
-
-    public int getCoordinateY() {
-        return coordinateY;
-    }
-
-    public void setCoordinateY(int coordinateY) {
-        this.coordinateY = coordinateY;
     }
 }
