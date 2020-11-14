@@ -1,6 +1,6 @@
 package Inter;
 
-import Engine.Interaction;
+import Engine.InteractionWithResources;
 import Exceptions.NotEnoughResourcesException;
 import MainGame.Resources.GoldResource;
 import MainGame.Resources.IronResource;
@@ -12,10 +12,10 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InteractionTest implements Interaction {
+public class InteractionWithResourcesTest implements InteractionWithResources {
 
 
-    private static InteractionTest interactionTest;
+    private static InteractionWithResourcesTest interactionTest;
     private static List<WaterResource> waterResources;
     private static List<IronResource> ironResources;
     private static List<UranResource> uranResources;
@@ -24,7 +24,7 @@ public class InteractionTest implements Interaction {
 
     @BeforeClass
     public static void createTestObjects() {
-        interactionTest = new InteractionTest();
+        interactionTest = new InteractionWithResourcesTest();
         waterResources = new ArrayList<>();
         ironResources = new ArrayList<>();
         uranResources = new ArrayList<>();

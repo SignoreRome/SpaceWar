@@ -6,9 +6,9 @@ import MainGame.Resources.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface Interaction {
+public interface InteractionWithResources {
 
-    //Обмен любых ресурсов в золото
+    //Обмен любых ресурсов в золото с проверкой кол-ва ресурсов
     default boolean swapResourcesToGold(List<? extends Resources> list1, List<GoldResource> list2, int count) throws NotEnoughResourcesException {
         if (count > list1.size()) throw new NotEnoughResourcesException("Недостаточно ресурсов, требуется: " + count);
         if (count * WaterResource.getCOST_OF_WATER_IN_GOLD() > list2.size())
@@ -42,7 +42,7 @@ public interface Interaction {
         }
     }
 
-    //Обмен золота в железо
+    //Обмен золота в железо с проверкой кол-ва ресурсов
     default boolean swapGoldToIron(List<GoldResource> list1, List<IronResource> list2, int count) throws NotEnoughResourcesException {
         int rightAmountMoney = count * IronResource.getCOST_OF_IRON_IN_GOLD();
         if (rightAmountMoney < list1.size())
@@ -57,7 +57,7 @@ public interface Interaction {
     }
 
 
-    //Обмен золота в воду
+    //Обмен золота в воду с проверкой кол-ва ресурсов
     default boolean swapGoldToWater(List<GoldResource> list1, List<WaterResource> list2, int count) throws NotEnoughResourcesException {
         int rightAmountMoney = count * WaterResource.getCOST_OF_WATER_IN_GOLD();
         if (rightAmountMoney < list1.size())
@@ -71,7 +71,7 @@ public interface Interaction {
         return true;
     }
 
-    //Обмен золота в уран
+    //Обмен золота в уран с проверкой кол-ва ресурсов
     default boolean swapGoldToUran(List<GoldResource> list1, List<UranResource> list2, int count) throws NotEnoughResourcesException {
         int rightAmountMoney = count * UranResource.getCOST_OF_URAN_IN_GOLD();
         if (rightAmountMoney < list1.size())
@@ -85,32 +85,40 @@ public interface Interaction {
         return true;
     }
 
-    /**
-     * Дальше методы для будущей реализации
-     **/
-
-    default void getGoldResource(List<GoldResource> listFrom, List<GoldResource> listTo, int count) {
+    //Передача золота из одного хранилища в другое с проверкой кол-ва ресурсов
+    default void getGoldResource(List<GoldResource> listFrom, List<GoldResource> listTo, int count) throws NotEnoughResourcesException {
+        if (listFrom.size() < count)
+            throw new NotEnoughResourcesException("Недостаточно золота, требуется: " + count);
         for (int i = 0; i < count; i++) {
             listFrom.remove(listFrom.size() - 1);
             listTo.add(new GoldResource());
         }
     }
 
-    default void getWaterResource(List<WaterResource> listFrom, List<WaterResource> listTo, int count) {
+    //Передача воды из одного хранилища в другое с проверкой кол-ва ресурсов
+    default void getWaterResource(List<WaterResource> listFrom, List<WaterResource> listTo, int count) throws NotEnoughResourcesException {
+        if (listFrom.size() < count)
+            throw new NotEnoughResourcesException("Недостаточно воды, требуется: " + count);
         for (int i = 0; i < count; i++) {
             listFrom.remove(listFrom.size() - 1);
             listTo.add(new WaterResource());
         }
     }
 
-    default void getIronResource(List<IronResource> listFrom, List<IronResource> listTo, int count) {
+    //Передача железа из одного хранилища в другое с проверкой кол-ва ресурсов
+    default void getIronResource(List<IronResource> listFrom, List<IronResource> listTo, int count) throws NotEnoughResourcesException {
+        if (listFrom.size() < count)
+            throw new NotEnoughResourcesException("Недостаточно железа, требуется: " + count);
         for (int i = 0; i < count; i++) {
             listFrom.remove(listFrom.size() - 1);
             listTo.add(new IronResource());
         }
     }
 
-    default void getUranResource(List<UranResource> listFrom, List<UranResource> listTo, int count) {
+    //Передача урана из одного хранилища в другое с проверкой кол-ва ресурсов
+    default void getUranResource(List<UranResource> listFrom, List<UranResource> listTo, int count) throws NotEnoughResourcesException {
+        if (listFrom.size() < count)
+            throw new NotEnoughResourcesException("Недостаточно Урана, требуется: " + count);
         for (int i = 0; i < count; i++) {
             listFrom.remove(listFrom.size() - 1);
             listTo.add(new UranResource());

@@ -1,5 +1,6 @@
 package PlanetsTest;
 
+import Exceptions.NotEnoughResourcesException;
 import MainGame.Planets.EarthPlanet;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -9,7 +10,7 @@ public class EarthPlanetTest {
     private static EarthPlanet earthPlanet;
 
     @BeforeClass
-    public static void createPlanetObject() {
+    public static void createPlanetObject() throws NotEnoughResourcesException {
         earthPlanet = EarthPlanet.getEarthPlanet();
     }
 
@@ -23,5 +24,7 @@ public class EarthPlanetTest {
         Assert.assertEquals(100, earthPlanet.getGoldStorage().size());
         System.out.println(earthPlanet.getInitialStateResourcesMap());
         System.out.println(earthPlanet.getStrFilePath());
+        System.out.println(earthPlanet.getEarthCommandos().toString());
+        System.out.println(earthPlanet.getFleet().get(0).toString());
     }
 }

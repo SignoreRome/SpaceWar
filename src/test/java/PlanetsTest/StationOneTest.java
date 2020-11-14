@@ -1,5 +1,6 @@
 package PlanetsTest;
 
+import Exceptions.NotEnoughResourcesException;
 import MainGame.Planets.StationOne;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -9,7 +10,7 @@ public class StationOneTest {
     private static StationOne stationOne;
 
     @BeforeClass
-    public static void createPlanetObject() {
+    public static void createPlanetObject() throws NotEnoughResourcesException {
         stationOne = StationOne.getStationOne();
     }
 
